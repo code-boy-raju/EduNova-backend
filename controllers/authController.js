@@ -117,8 +117,8 @@ const instructorSignup = async (req, res) => {
 
     // Create token to identify this instructor
     const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: "1d" });
-    const approveUrl = `http://localhost:4000/user/verifyInstructor?status=approve&token=${token}`;
-    const rejectUrl = `http://localhost:4000/user/verifyInstructor?status=reject&token=${token}`;
+    const approveUrl = `https://edunova-srever.onrender.com/user/verifyInstructor?status=approve&token=${token}`;
+    const rejectUrl = `https://edunova-srever.onrender.com/user/verifyInstructor?status=reject&token=${token}`;
  
     const mailOptions = {
       from: process.env.SMTP_USER,
