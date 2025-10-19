@@ -12,8 +12,8 @@ const cors=require("cors")
 // ✅ CORS configuration
 const corsOptions = {
   origin: [
-    'https://edunova-one.vercel.app/', // your React frontend URL (Vite default)
-    'http://localhost:3000', // optional: if you're using CRA
+    'https://edunova-one.vercel.app', process.env.FRONTEND_URL// your React frontend URL (Vite default)
+   // optional: if you're using CRA
     // You can also add your production domain here later
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
