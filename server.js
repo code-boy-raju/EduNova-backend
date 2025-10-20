@@ -35,8 +35,7 @@ app.options(/.*/, cors(corsOptions));
 // middlewares
 app.use(express.json({ limit: '1gb' }));
 app.use(express.urlencoded({ extended: true, limit: '1gb' }));
-
-const path = require('path');
+// Serve static files from 'uploads' and 'videos' directories
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/videos', express.static(path.join(__dirname, 'videos')));
 
