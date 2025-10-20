@@ -263,15 +263,15 @@
 
 
 // module.exports = { studentSignup,verifyStudentOtp , instructorSignup, verifyInstructor ,login};
-const axios = require("axios");
+
 const { claudynaryUpload } = require("../config/cloudinary.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { userModel } = require("../models/registerModel.js");
-const { sendEmail } = require("../services/emailService.js");
+const { sendEmail } = require("../services/emailervice.js");
 require("dotenv").config();
 const fs = require("fs");
-const { log } = require("console");
+
 
 // ------------------- STUDENT SIGNUP WITH OTP -----------------------
 const studentSignup = async (req, res) => {
