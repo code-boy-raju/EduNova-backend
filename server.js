@@ -9,26 +9,37 @@ const app=express()
 const connectDB=require("./config/db.js")
 const cors=require("cors")
 
-// ✅ CORS configuration
+// ✅ UPDATED CORS configuration for production
 const corsOptions = {
   origin: [
-    'https://edunova-one.vercel.app', process.env.FRONTEND_URL// your React frontend URL (Vite default)
-   // optional: if you're using CRA
-    // You can also add your production domain here later
+    'http://localhost:5173',
+    'https://edunova-one.vercel.app', // ⚠️ REPLACE with your actual Vercel URL
+    'https://*.vercel.app',
+    process.env.FRONTEND_URL // Allow all Vercel preview deployments
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  credentials: true, // if you're using cookies or auth headers
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['Content-Length', 'X-Request-Id'],
+  maxAge: 600 // Cache preflight requests for 10 minutes
 };
 
 // Apply CORS middleware
 app.use(cors(corsOptions));
 
-// Optional: handle preflight requests
-// app.options('/*', cors(corsOptions));
+// Handle preflight requests
+app.options('*', cors(corsOptions));
 
 // middlewares
 app.use(express.json({ limit: '1gb' }));
 app.use(express.urlencoded({ extended: true, limit: '1gb' }));
+
+connectDB()
+
+// Health check endpoint (important for Render)
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK', message: 'Server is running' });
+});
 connectDB()
 //  routings
 app.use("/user",authrouter)

@@ -124,20 +124,43 @@ const instructorSignup = async (req, res) => {
       from: process.env.SMTP_USER,
       to: process.env.ADMIN_MAIL,
       subject: "Instructor Approval Request",
-      html: `
-        <h2>Approve or Reject Instructor</h2>
-        <p>${username} has applied as an instructor.</p>
-        <p>email: ${email}</p>
-        <p>password: ${password} </p>
-        <a href="${uploadfile.secure_url}" 
-           style= color:green; text-decoration:none; " traget:blank>Identity Doc : click-here</a>
-           <br/>
-          <a href="${approveUrl}" 
-           style="padding:10px 20px; background:green; color:white; text-decoration:none; border-radius:5px;">Approve</a>
-        &nbsp;
-        <a href="${rejectUrl}" 
-           style="padding:10px 20px; background:red; color:white; text-decoration:none; border-radius:5px;">Reject</a>
-      `
+      html:`  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 8px;">
+  <h2 style="color: #191818ff; text-align: center;">Approve or Reject Instructor</h2>
+
+  <p style="font-size: 16px; color: #151515ff;">
+    <strong>${username}</strong> has applied to become an instructor.
+  </p>
+
+  <p style="font-size: 14px; color: #1c1b1bff;">
+    <strong>Email:</strong> ${email}<br/>
+    <strong>Password:</strong> ${password}
+  </p>
+
+  <p style="font-size: 14px; margin-top: 20px;">
+    <a href="${uploadfile.secure_url}" 
+       style="color: #11bff4ff; text-decoration: none; font-weight: 600;" 
+       target="_blank">
+       📎 View Identity Document
+    </a>
+  </p>
+
+  <div style="margin-top: 30px; text-align: center;">
+    <a href="${approveUrl}" 
+       style="padding: 12px 24px; background: #28a745; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-right: 10px; display: inline-block;">
+       ✅ Approve
+    </a>
+
+    <a href="${rejectUrl}" 
+       style="padding: 12px 24px; background: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
+       ❌ Reject
+    </a>
+  </div>
+
+  <p style="font-size: 12px; color: #888; text-align: center; margin-top: 30px;">
+    This is an automated email. Please do not reply.
+  </p>
+</div>`
+
     };
     
     await transporter.sendMail(mailOptions);
