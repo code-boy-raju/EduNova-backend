@@ -10,7 +10,7 @@ const generateQuizFromText = async (text, apiKey, numQuestions = 5) => {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`;
 
   const prompt = `
-Create ${numQuestions} multiple-choice quiz questions (each with 4 options and 1 correct answer)
+Create ${numQuestions} multiple-choice medium level quiz questions in general english words (each with 4 options and 1 correct answer)
 based strictly on the following lesson content:
 
 ${text}
