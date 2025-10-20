@@ -8,6 +8,7 @@ const resultRouter=require("./routers/resultRoute.js")
 const app=express()
 const connectDB=require("./config/db.js")
 const cors=require("cors")
+const path=require('path');
 
 // ✅ UPDATED CORS configuration for production
 const corsOptions = {
@@ -34,6 +35,10 @@ app.options(/.*/, cors(corsOptions));
 // middlewares
 app.use(express.json({ limit: '1gb' }));
 app.use(express.urlencoded({ extended: true, limit: '1gb' }));
+
+const path = require('path');
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/videos', express.static(path.join(__dirname, 'videos')));
 
 connectDB()
 
